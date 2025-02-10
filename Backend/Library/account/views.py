@@ -72,8 +72,9 @@ class BookView(APIView):
     def post(self,request):
         print(request.data)
         data = request.data.copy()
+        print(request.user.id)
         data['author_id'] = request.user.id
-
+        print(data)
         serializer = BookSerializer(data = data)
         print(serializer)
         if serializer.is_valid():
@@ -104,7 +105,7 @@ class BookView(APIView):
                 
             },status=status.HTTP_200_OK)
         
-    def post(self,request):
+    def put(self,request):
         data = request.data['id']
         obj = Book.objects.get(id = data)
         obj.delete()

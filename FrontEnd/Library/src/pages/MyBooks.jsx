@@ -17,7 +17,7 @@ const MyBooksPage = () => {
   });
 
   const auth = useSelector((state) => state.auth);
-
+  const [change,setChange] = useState(false)
   // Fetch Books from API when the component loads
   useEffect(() => {
     const fetchBooks = async () => {
@@ -34,7 +34,7 @@ const MyBooksPage = () => {
     };
 
     fetchBooks();
-  }, [auth.token]);
+  }, [auth.token,change]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -64,6 +64,7 @@ const MyBooksPage = () => {
       setBooks(prev => [...prev, response.data]);
       setNewBook({ title: '', author: '', genre: '', year: '', image: null });
       setShowAddForm(false);
+      setChange(!change)
     } catch (error) {
       console.error('Error adding book:', error);
     }
@@ -71,7 +72,7 @@ const MyBooksPage = () => {
 
   const handleDeleteBook = async (id) => {
     try {
-      await axios.post(`http://127.0.0.1:8000/account/book/`,{id}, {
+      await axios.put(`http://127.0.0.1:8000/account/book/`,{id}, {
         headers: { Authorization: `Bearer ${auth.token}` }
       });
 
