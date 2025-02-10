@@ -20,6 +20,7 @@ function Favourites() {
         fetchData()
     },[])
     const removeFav = async(id)=>{
+
       const response = await axios.put('http://127.0.0.1:8000/account/favourite/',{id}, {
         headers: { Authorization: `Bearer ${auth.token}` }
       }); 
@@ -44,7 +45,7 @@ function Favourites() {
               <img src={`http://127.0.0.1:8000${book.book.image}`} alt={book.title} className="w-full h-60 object-cover rounded-lg"/>
               <h3 className="text-lg font-semibold mt-3">{book.book.title}</h3>
               <p className="text-gray-500 text-sm">by {book.book.author}</p>
-              <button className="mt-3 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600" onClick={()=>removeFav(book.book.id)}>
+              <button className="mt-3 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600" onClick={()=>removeFav(book.id)}>
                 Remove from Favourites
               </button>
             </div>

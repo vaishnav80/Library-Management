@@ -74,8 +74,13 @@ class BookSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class FavouriteSerializer(serializers.ModelSerializer):
-    book = BookSerializer(source='book_id', read_only=True)
+    book = BookSerializer(source='book_id', read_only=True)  
+    
+    book_id = serializers.PrimaryKeyRelatedField(
+        queryset=Book.objects.all(), write_only=True
+    ) 
+    
 
     class Meta:
         model = Favourite
-        fields = ['id', 'user_id', 'book']
+        fields = ['id', 'user_id', 'book', 'book_id']

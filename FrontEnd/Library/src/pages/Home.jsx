@@ -13,7 +13,7 @@ const auth = useSelector((select)=>select.auth)
     const response = await axios.post('http://127.0.0.1:8000/account/favourite/',{book_id}, {
         headers: { Authorization: `Bearer ${auth.token}` }
       });    
-      navigate('/favourite')                                                                                                                                                                                                                                                                                                                                                                                                           
+      navigate('/favourites')                                                                                                                                                                                                                                                                                                                                                                                                           
   };
   useEffect(() => {
     const fetchBooks = async () => {
