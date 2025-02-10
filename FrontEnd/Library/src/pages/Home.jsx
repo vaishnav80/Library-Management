@@ -13,7 +13,9 @@ const auth = useSelector((select)=>select.auth)
     const response = await axios.post('http://127.0.0.1:8000/account/favourite/',{book_id}, {
         headers: { Authorization: `Bearer ${auth.token}` }
       });    
-      if(response.data.status == 400){
+      console.log(response);
+      
+      if(response.response.status == 400){
         alert("Already exist")
       }
       else{
