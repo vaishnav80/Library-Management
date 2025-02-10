@@ -10,12 +10,13 @@ function Home() {
   const [booksData,setBooks] = useState([])
 const auth = useSelector((select)=>select.auth)
   const addToFavorites = async(book_id) => {
+    
     const response = await axios.post('http://127.0.0.1:8000/account/favourite/',{book_id}, {
         headers: { Authorization: `Bearer ${auth.token}` }
       });    
       console.log(response,'response.....');
       
-      if(response.response.status == 406){
+      if(response.data.status == 200){
         alert("Already exist")
       }
       else{

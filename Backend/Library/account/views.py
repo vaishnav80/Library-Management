@@ -145,7 +145,7 @@ class FavouriteView(APIView):
         if obj:
             return Response({
                 "message" : "Already exist"
-            },status=status.HTTP_406_NOT_ACCEPTABLE)
+            },status=status.HTTP_200_OK)
         serializer = FavouriteSerializer(data = data)
         print(serializer)
         if serializer.is_valid():
