@@ -4,10 +4,14 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { useLocation } from "react-router-dom";
 
 function Favourites() {
     const auth = useSelector((select)=>select.auth)
     const [favouriteBooks,setFavourite] = useState([])
+    const [change,setChange] = useState(false)
+    const location = useLocation();
+
     useEffect(()=>{
         const fetchData = async ()=>{
               const response = await axios.get('http://127.0.0.1:8000/account/favourite', {
@@ -18,12 +22,13 @@ function Favourites() {
               
         }
         fetchData()
-    },[])
+    },[change,location.favourites])
     const removeFav = async(id)=>{
 
       const response = await axios.put('http://127.0.0.1:8000/account/favourite/',{id}, {
         headers: { Authorization: `Bearer ${auth.token}` }
       }); 
+      setChange(!change)
     }
   return (
     <>

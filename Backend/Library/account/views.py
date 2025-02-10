@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from .serializers import RegisterSerializer,LoginSerializer,BookSerializer,FavouriteSerializer
 from .models import Book,Favourite
 from django.contrib.auth import logout
+from django.db.models import Q
 
 
 class RegisterView(APIView):
@@ -139,6 +140,11 @@ class FavouriteView(APIView):
         print(request.data)
         data = request.data.copy()
         data['user_id'] = request.user.id
+        obj = Favourite.objects.filter(Q(user_id = request.user.id) & Q(book_id = data['book_id'])).exists()
+        if obj:
+            return Response({
+                "message" : "Already exist"
+            },status=status.HTTP_400_BAD_REQUEST)
         serializer = FavouriteSerializer(data = data)
         print(serializer)
         if serializer.is_valid():
