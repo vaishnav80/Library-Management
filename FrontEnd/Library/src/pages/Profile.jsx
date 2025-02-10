@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/authSlice";

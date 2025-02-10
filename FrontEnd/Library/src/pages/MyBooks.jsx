@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Plus, Trash } from 'lucide-react';
 import Footer from '../components/Footer';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
